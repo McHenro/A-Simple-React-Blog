@@ -12,8 +12,8 @@ const Home = () => {
     setTimeout(() => {
       axios.get("http://localhost:8000/blogs").then((res) => {
         setBlogs(res.data);
+        setIspending(false);
       });
-      setIspending(false);
     }, 1000);
   }, []);
 
