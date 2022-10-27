@@ -1,25 +1,20 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import BlogList from "./BlogList";
-// import React from 'react'
-// import axios from 'axios';
+import axios from 'axios';
 
 
 const Home = () => {
   const [blogs, setBlogs] = useState(null);
+  const [isPending, setIspending] = useState(true);
 
   useEffect(() => {
-    async function fetchData(){
-      await fetch("http://localhost:8000/blogs")
-        .then((res) => {
-          return res.json()
-        })
-        .then((data)=>{
-          setBlogs(data);
-        });
-      } 
-      fetchData();  
-      
+    setTimeout(() => {
+      axios.get("http://localhost:8000/blogs").then((res) => {
+        setBlogs(res.data);
+      });
+      setIspending(false);
+    }, 1000);
   }, []);
 
   const handleDelete = (id) => {
@@ -29,6 +24,7 @@ const Home = () => {
 
   return (
     <div className="home">
+      {isPending && <div>loading...</div>}
       {blogs && (
         <BlogList
           blogs={blogs}
