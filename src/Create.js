@@ -1,14 +1,26 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
+import axios from "axios";
 
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("mario");
+  const [isPending, setIspending] = useState(false);
+  const navigate = useNavigate();
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blog = {title, body, author}
-    console.log(blog)
+    const blog = { title, body, author };
+    setIspending(true);
+
+    axios.post("http://localhost:8000/blogs", blog)
+    .then(response=> {
+      console.log(response);
+      setIspending(false);
+      navigate('/');
+    })
   };
 
   return (
@@ -34,7 +46,8 @@ const Create = () => {
           <option value="chizzy">chizzy</option>
           <option value="henry">henry</option>
         </select>
-        <button>Add blog</button>
+        {!isPending && <button>Add blog</button>}
+        {isPending && <button disabled>Adding blog...</button>}
       </form>
     </div>
   );
