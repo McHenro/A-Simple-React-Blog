@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
+import axios from "axios";
 
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [author, setAuthor] = useState("mario");
-  const [isPending, setIspending] = useState(false)
-
+  const [isPending, setIspending] = useState(false);
+  const navigate = useNavigate();
 
 
   const handleSubmit = (e) => {
@@ -13,15 +15,12 @@ const Create = () => {
     const blog = { title, body, author };
     setIspending(true);
 
-    fetch("http://localhost:8000/blogs", {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(blog)
-    }).then(()=>{
-      console.log('New Blog Added')
+    axios.post("http://localhost:8000/blogs", blog)
+    .then(response=> {
+      console.log(response);
       setIspending(false);
-
-    });
+      navigate('/');
+    })
   };
 
   return (
