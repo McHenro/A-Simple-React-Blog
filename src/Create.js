@@ -5,7 +5,7 @@ import axios from "axios";
 const Create = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("mario");
+  const [author, setAuthor] = useState("Saheed");
   const [isPending, setIspending] = useState(false);
   const navigate = useNavigate();
 
