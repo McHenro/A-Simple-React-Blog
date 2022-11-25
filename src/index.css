@@ -65,6 +65,17 @@ p {
 .blog-details div {
   margin: 20px 0;
 }
+.blog-details button{
+  border: 0;
+  color: #fff;
+  background: #f1356d;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  width: 70px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
 
 /* create new blog form */
 .create {
@@ -95,5 +106,7 @@ p {
   border: 0;
   padding: 8px;
   border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
 }
